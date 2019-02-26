@@ -1,0 +1,12 @@
+// Submissions
+
+{
+    "id": "123131321",
+    "nick": "Vidde",
+    "prefs": [
+        "no peanuts!",
+        "no gluten"
+    ]
+}
+
+// Documents TBD
