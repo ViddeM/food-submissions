@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import SubmittedList from './components/SubmittedList';
 import './App.css';
 import IsSubmitted from './components/IsSubmitted';
+import PrefSelection from './components/PrefSelection';
 
 
 
@@ -38,7 +39,7 @@ class App extends Component {
       <div>
         <IsSubmitted isSubmitted = {false}/>
         <SubmittedList users={example} />
-        {//<PrefsSelector />
+        {<PrefSelection />
         }
       </div>
     );

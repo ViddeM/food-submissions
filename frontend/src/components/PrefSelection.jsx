@@ -219,6 +219,8 @@ class PrefSelection extends React.Component {
     this.setState({
       [name]: value,
     });
+    console.log(value);
+    this.props.onChange(value.label);
   };
 
   render() {

@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import Check from '@material-ui/icons/Check';
 import Close from '@material-ui/icons/Close';
 import Button from '@material-ui/core/Button';
-import Swal from 'sweetalert2';
-import SweetAlert from 'react-bootstrap-sweetalert';
-import withReactContent from 'sweetalert2-react-content';
+import swal from '@sweetalert/with-react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ReactDOM from 'react-dom';
 import PrefSelection from './PrefSelection';
 
 
-const MySwal = withReactContent(Swal);
+//const MySwal = withReactContent(Swal);
 //const SweetAlert = require('react-bootstrap-sweetalert');
 
 
@@ -20,29 +18,31 @@ class IsSubmitted extends Component {
         super(props);
     }
 
+    handleChange(value){
+        console.log(value);
+        swal.setActionValue(value);
+    }
+
 
     submitBtnOnClick = () => {
-        MySwal.fire({
-            title: <p>Insert nick</p>,
-            input: "text",
-            footer: 'Copyright 2018',
-            onOpen: () => {
-                // `MySwal` is a subclass of `Swal`
-                //   with all the same instance & static methods
-                // MySwal.clickConfirm()
+        swal({
+            title: "What is your nick?",
+            content: "input",
+            buttons: {
+                confirm: "Confirm",
+                cancel: "Cancel"
             }
-        }).then((result) => {
-            MySwal.fire({
-                html: "<div id=\"superRoot\"></div>",
-                onConfirm: () => {
-                    console.log("FlockOff");
-                    
-                },
-                onOpen: () => {
-                    ReactDOM.render(<PrefSelection />, document.getElementById('superRoot'));
-
+        }).then((valueName) => {
+            console.log(valueName);
+            swal({
+                title: "What are your special preferences?",
+                content: <PrefSelection onChange={this.handleChange.bind(this)}/>,
+                buttons: {
+                    confirm: "Confirm",
+                    cancel: "Cancel"
                 }
-
+            }).then((valuePrefs) => {
+                console.log(valuePrefs);
             })
         })
     }
