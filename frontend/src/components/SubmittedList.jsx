@@ -10,13 +10,12 @@ class SubmittedList extends Component {
 
     render() {
 
-        return(
-        
-        <div>
-            {this.props.users.map(x =>
-                <UserListItem key = {x.name} name = {x.name} prefs = {x.prefs} />
-            )}
-        </div>);
+        return (
+            <div>
+                {this.props.users.map(x =>
+                    <UserListItem key={x.name} name={x.name} prefs={x.prefs} />
+                )}
+            </div>)
     }
 }
 

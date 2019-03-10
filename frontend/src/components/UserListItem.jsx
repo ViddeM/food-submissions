@@ -66,7 +66,7 @@ class UserListItem extends React.Component {
                 <Warning />
               </ListItemIcon>
               <ListItemText inset primary={x} />
-            </ListItem>)};
+            </ListItem>)}
           </List>
         </Collapse>
       </List>

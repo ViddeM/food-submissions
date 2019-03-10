@@ -7,20 +7,15 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import ReactDOM from 'react-dom';
 import PrefSelection from './PrefSelection';
 
-
-//const MySwal = withReactContent(Swal);
-//const SweetAlert = require('react-bootstrap-sweetalert');
-
-
 class IsSubmitted extends Component {
 
     constructor(props) {
         super(props);
     }
 
-    handleChange(value){
+    handleChange(value) {
         console.log(value);
-        swal.setActionValue(value);
+        swal.setActionValue(value.join());
     }
 
 
@@ -33,16 +28,25 @@ class IsSubmitted extends Component {
                 cancel: "Cancel"
             }
         }).then((valueName) => {
-            console.log(valueName);
+            if (valueName) {
+                return;
+            }
             swal({
                 title: "What are your special preferences?",
-                content: <PrefSelection onChange={this.handleChange.bind(this)}/>,
+                content: <PrefSelection onChange={this.handleChange.bind(this)} />,
                 buttons: {
                     confirm: "Confirm",
                     cancel: "Cancel"
                 }
             }).then((valuePrefs) => {
+                if (valuePrefs === null) {
+                    return;
+                }
+                if (valuePrefs) {
+                    valuePrefs = valuePrefs.split(',');
+                }
                 console.log(valuePrefs);
+                console.log(valueName);
             })
         })
     }
@@ -58,18 +62,12 @@ class IsSubmitted extends Component {
             );
         } else {
             return (
-                <div>
-                    <Close />
+                <div class='centercolumn'>
+                    <Close class='centercolumn'/>
                     User is not submitted
                     <Button onClick={this.submitBtnOnClick} color="primary">
                         Submit
                     </Button>
-                    {/*<SweetAlert
-                        title={<span>HTML <small>Title</small>!</span>}
-                        onConfirm={this.hideAlert}
-                    >
-                        <span>A custom <span style={{ color: '#F8BB86' }}>html</span> message.</span>
-                    </SweetAlert>*/}
                 </div>
             );
         }
