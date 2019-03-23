@@ -1,0 +1,32 @@
+version: "2"
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: foodsubmissions
+      POSTGRES_DB: foodsubmissions
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  app:
+    build:
+      context: ./backend/
+      dockerfile: dev.Dockerfile
+    ports:
+      - 5000:5000
+
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: dev.Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/usr/src/app/
